@@ -12,7 +12,6 @@ public class ShortCycle extends Thread{
             Shadow.time = new SimpleDateFormat("HH:mm:ss").format(new Date());
             try {
                 Thread.sleep(1000);
-                ServerPlayNetworking.send()
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
