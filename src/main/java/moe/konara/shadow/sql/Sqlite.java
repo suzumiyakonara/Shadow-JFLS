@@ -53,4 +53,39 @@ public class Sqlite {
         }
     }
 
+    public void insertData(String table_name, Collection<ColumnValue> column_values){
+        try {
+            if(table_name.isEmpty() || column_values.isEmpty())
+                throw new SQLException();
+            StringBuilder sql = new StringBuilder();
+            sql.append("INSERT INTO ").append(table_name).append(" ");
+            StringBuilder columns = new StringBuilder().append("(");
+            StringBuilder values = new StringBuilder().append("(");
+            Iterator<ColumnValue> column_value_iterator = column_values.iterator();
+            while (column_value_iterator.hasNext()){
+                ColumnValue tmp = column_value_iterator.next();
+                columns.append(tmp.getColumn());
+                if(tmp.getValue() instanceof String) values.append("\"");
+                values.append(tmp.getValue());
+                if(tmp.getValue() instanceof String) values.append("\"");
+                if(column_value_iterator.hasNext()){
+                    columns.append(",");
+                    values.append(",");
+                }
+            }
+            columns.append(")");
+            values.append(")");
+            sql.append(columns).append(" VALUES").append(values).append(";");
+            Connection conn = Pool.getConnection();
+            Statement stmt = conn.createStatement();
+            stmt.execute(sql.toString());
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            this.Logger.error(e.getMessage());
+            this.Logger.error("Throw error when insert data.");
+        }
+    }
+
 }

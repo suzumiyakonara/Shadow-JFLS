@@ -22,7 +22,4 @@ public class ConnectionPool {
     public BasicDataSource getDataSource() {
         return DataSource;
     }
-    public Statement createStatement() throws SQLException{
-        return this.getConnection().createStatement();
-    }
 }
