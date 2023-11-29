@@ -3,8 +3,7 @@ package moe.konara.shadow.sql;
 import org.slf4j.Logger;
 
 import java.sql.*;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 public class Sqlite {
     DatabaseMetaData Meta;
@@ -85,6 +84,50 @@ public class Sqlite {
         } catch (SQLException e) {
             this.Logger.error(e.getMessage());
             this.Logger.error("Throw error when insert data.");
+        }
+    }
+
+    private static List<Map<String,String>> convertList(ResultSet rs) throws SQLException{
+        List<Map<String,String>> list = new ArrayList<>();
+        ResultSetMetaData md = rs.getMetaData();
+        int columnCount = md.getColumnCount();
+        while (rs.next()) {
+            Map<String,String> rowData = new HashMap<>();
+            for (int i = 1; i <= columnCount; i++) {
+                rowData.put(md.getColumnName(i), rs.getObject(i).toString());
+            }
+            list.add(rowData);
+        }
+        return list;
+    }
+
+    public List<Map<String,String>> selectData(String table_name){
+        return selectData(table_name, new ArrayList<>());
+    }
+
+    public List<Map<String,String>> selectData(String table_name, Collection<ColumnValue> column_values){
+        try {
+            if(table_name.isEmpty())
+                throw new SQLException();
+            StringBuilder sql = new StringBuilder();
+            sql.append("SELECT * FROM ").append(table_name);
+            if(!column_values.isEmpty()){
+                sql.append(" WHERE ");
+            }
+            sql.append(";");
+            Connection conn = Pool.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rest = stmt.executeQuery(sql.toString());
+            List<Map<String,String>> result = convertList(rest);
+
+            rest.close();
+            stmt.close();
+            conn.close();
+            return result;
+        } catch (SQLException e) {
+            this.Logger.error(e.getMessage());
+            this.Logger.error("Throw error when select data.");
+            return null;
         }
     }
 
