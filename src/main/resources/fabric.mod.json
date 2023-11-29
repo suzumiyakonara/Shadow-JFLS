@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "shadow",
+  "version": "${version}",
+  "name": "Shadow",
+  "description": "For campus digital twin",
+  "authors": ["Konara"],
+  "contact": {
+    "repo": "https://github.com/suzumiyakonara/Shadow-JFLS"
+  },
+  "license": "MIT",
+  "icon": "assets/shadow/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "moe.konara.shadow.Shadow"
+    ]
+  },
+  "mixins": [
+    "shadow.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
