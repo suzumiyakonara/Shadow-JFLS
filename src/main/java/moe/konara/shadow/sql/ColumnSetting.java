@@ -1,10 +1,10 @@
 package moe.konara.shadow.sql;
 
 public class ColumnSetting {
-    private String Name;
-    private ColumnType Type;
-    private boolean Nullable;
-    private boolean Iskey;
+    private final String Name;
+    private final ColumnType Type;
+    private final boolean Nullable;
+    private final boolean Iskey;
     public enum ColumnType{
         INT("INT"),
         TINYINT("TINYINT"),
