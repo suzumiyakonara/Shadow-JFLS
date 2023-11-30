@@ -28,20 +28,17 @@ public class ColumnSetting {
             return this.type + (value == 0 ? "" : "(" + value + ")");
         }
     }
-    private void init(String name, ColumnType type, boolean nullable, boolean iskey){
+    public ColumnSetting(String name,ColumnType type){
+        this(name,type,true,false);
+    }
+    public ColumnSetting(String name,ColumnType type,boolean nullable){
+        this(name,type,nullable,false);
+    }
+    public ColumnSetting(String name,ColumnType type,boolean nullable,boolean iskey){
         this.Name = name;
         this.Type = type;
         this.Nullable = nullable;
         this.Iskey = iskey;
-    }
-    public ColumnSetting(String name,ColumnType type){
-        init(name,type,true,false);
-    }
-    public ColumnSetting(String name,ColumnType type,boolean nullable){
-        init(name,type,nullable,false);
-    }
-    public ColumnSetting(String name,ColumnType type,boolean nullable,boolean iskey){
-        init(name,type,nullable,iskey);
     }
     @Override
     public String toString(){
