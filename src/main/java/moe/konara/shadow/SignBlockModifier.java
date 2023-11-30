@@ -29,12 +29,8 @@ public class SignBlockModifier extends Thread{
                 if(be!=null) {
                     if (!(be instanceof SignBlockEntity)){Shadow.SQL.deleteIfExists("Sign_List", signInfo);break;}
                     BlockEntityUpdateS2CPacket packet = BlockEntityUpdateS2CPacket.create(be,this::processNbt);
-                    if(!Shadow.SERVER.getPlayerManager().getPlayerList().isEmpty()){
-                        Shadow.SERVER.getPlayerManager().getPlayerList().get(0).sendMessage(Text.of(pos.toShortString()));
-                    }
                     if(Objects.requireNonNull(packet.getNbt()).getBoolean("modified"))
                         for (ServerPlayerEntity player : PlayerLookup.tracking(world, pos)) {
-                            player.sendMessage(Text.of(packet.getNbt().asString()));
                             player.networkHandler.sendPacket(packet);
                         }
                 }
