@@ -1,14 +1,5 @@
 package moe.konara.shadow;
 
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SignBlock;
-import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

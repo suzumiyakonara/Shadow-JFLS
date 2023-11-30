@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class DataForm implements Iterable<Map<String,String>> {
     public Map<Integer,Map<String,String>> Data;

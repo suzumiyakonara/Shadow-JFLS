@@ -4,7 +4,6 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class ConnectionPool {
     protected BasicDataSource DataSource;
