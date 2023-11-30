@@ -1,6 +1,10 @@
 plugins {
     id 'fabric-loom' version '1.2-SNAPSHOT'
     id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+}
+shadowJar {
+    archiveFileName = project.archivesBaseName + "-" + project.mod_version + ".jar"
 }
 
 version = project.mod_version
@@ -22,7 +26,6 @@ dependencies {
 
     implementation "org.xerial:sqlite-jdbc:3.44.1.0"
     implementation "org.apache.commons:commons-dbcp2:2.11.0"
-    implementation "com.google.code.gson:gson:2.10.1"
 }
 
 processResources {
