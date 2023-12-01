@@ -9,10 +9,13 @@ shadowJar {
         include(dependency('org.apache.commons:.*'))
         include(dependency('org.xerial:sqlite-jdbc'))
     }
+    mergeGroovyExtensionModules()
 }
 
 version = project.mod_version
 group = project.maven_group
+
+jar.enabled = false
 
 repositories {
     mavenCentral()

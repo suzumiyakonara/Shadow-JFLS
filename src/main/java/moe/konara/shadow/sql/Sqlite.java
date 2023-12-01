@@ -13,14 +13,14 @@ public class Sqlite {
     public Sqlite(String file_path, Logger logger) {
         this.Logger = logger;
         this.Url = "jdbc:sqlite:" + file_path;
-        this.Pool = new ConnectionPool(this.Url);
         try {
+            this.Pool = new ConnectionPool(this.Url);
             Connection conn = this.Pool.getConnection();
             if (conn != null) {
                 Meta = conn.getMetaData();
                 this.Logger.info(Meta.getDriverName() + " database has been connected.");
             }else throw new SQLException();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             this.Logger.error(e.getMessage());
             this.Logger.error("Throw error when creating SQL.");
         }

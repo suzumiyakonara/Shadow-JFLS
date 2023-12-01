@@ -11,6 +11,7 @@
   "license": "MIT",
   "icon": "assets/shadow/icon.png",
   "environment": "*",
+  "accessWidener": "shadow.accesswidener",
   "entrypoints": {
     "main": [
       "moe.konara.shadow.Shadow"
