@@ -8,6 +8,7 @@ shadowJar {
     dependencies {
         include(dependency('org.apache.commons:.*'))
         include(dependency('org.xerial:sqlite-jdbc'))
+        include(dependency('org.eclipse.paho:org.eclipse.paho.mqttv5.client'))
     }
     mergeGroovyExtensionModules()
     exclude("moe/konara")
