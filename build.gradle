@@ -4,18 +4,25 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 shadowJar {
-    archiveFileName = project.archivesBaseName + "-" + project.mod_version + ".jar"
+    archiveFileName = project.archivesBaseName + "-" + project.mod_version + "-lib.jar"
     dependencies {
         include(dependency('org.apache.commons:.*'))
         include(dependency('org.xerial:sqlite-jdbc'))
     }
     mergeGroovyExtensionModules()
+    exclude("moe/konara")
+    exclude("*.json")
+    exclude("*.accesswidener")
+    exclude("assets")
 }
 
 version = project.mod_version
 group = project.maven_group
 
-jar.enabled = false
+tasks.named("build") {
+    jar.enabled = false
+    dependsOn(tasks.named("shadowJar"))
+}
 
 repositories {
     mavenCentral()
@@ -33,6 +40,7 @@ dependencies {
 
     implementation "org.xerial:sqlite-jdbc:3.44.1.0"
     implementation "org.apache.commons:commons-dbcp2:2.11.0"
+    implementation "org.eclipse.paho:org.eclipse.paho.mqttv5.client:1.2.5"
 }
 
 processResources {
